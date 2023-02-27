@@ -9,16 +9,92 @@
         <div class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0" *ngFor="let column of columns">
           <div class="flex justify-between py-1">
             <h3 class="text-sm font-bold ml-2">{{column.title}}</h3>
+            <cdk-accordion>
+              <cdk-accordion-item #accordionMenu="cdkAccordionItem">
+                <button type="button" class=" text-gray-500 hover:text-gray-700 hover:bg-gray-300 h-full px-2 cursor-pointer
+                rounded" (click)="accordionMenu.toggle()">
+                  <fa-icon [icon]="faEllipsisH"></fa-icon>
+                </button>
+                <div class="absolute z-10 bg-white w-72 flex flex-col px-4 py-2 justify-center shadow rounded"
+                  [ngClass]="{hidden:!accordionMenu.expanded,block:accordionMenu.expanded}">
+                  <h4 class="text-center">Enumerar acciones</h4>
+                  <hr style="border-width: 0.5;" class="border-r-gray-500 w-full mx-auto my-2">
+                  <ul class="flex flex-col text-left text-sm">
+                    <li>
+                      <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Añadir
+                        tarjeta...</a>
+                    </li>
+                    <li>
+                      <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Copiar
+                        lista...</a>
+                    </li>
+                    <li>
+                      <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Mover lista...</a>
+                    </li>
+                    <li>
+                      <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Seguir</a>
+                    </li>
+                  </ul>
+                  <hr style="border-width: 0.5;" class="border-r-gray-500 w-full mx-auto my-2">
+                  <h6 class="text-left text-sm py-1 font-semibold text-gray-400">Automatización</h6>
+                  <ul class="flex flex-col text-left text-sm">
+                    <li>
+                      <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Cuando se añada
+                        una
+                        tarjeta a la lista...</a>
+                    </li>
+                    <li>
+                      <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Todos los
+                        dias,ordenar
+                        la lista por...</a>
+                    </li>
+                    <li>
+                      <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Todos los lunes,
+                        ordenar la lista por...</a>
+                    </li>
+                    <li>
+                      <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Crear una regla
+                        personalizada</a>
+                    </li>
+                  </ul>
+                  <hr style="border-width: 0.5;" class="border-r-gray-500 w-full my-2">
+                  <ul class="flex flex-col text-left text-sm">
+                    <li>
+                      <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Mover todas las
+                        tarjetas de esta lista...</a>
+                    </li>
+                    <li>
+                      <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Archivar todas las
+                        tarjetas de esta lista...</a>
+                    </li>
+                  </ul>
+                  <hr style="border-width: 0.5;" class=" border-r-gray-500 w-full mx-auto my-2">
+                  <ul class="flex flex-col text-left text-sm">
+                    <li>
+                      <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Archivar
+                        lista</a>
+                    </li>
+                  </ul>
+                </div>
+              </cdk-accordion-item>
+            </cdk-accordion>
           </div>
           <div class="text-sm mt-2 min-h-[2.5rem]" cdkDropList (cdkDropListDropped)="drop($event)"
             [cdkDropListData]="column.todos">
-            <div *ngFor="let item of column.todos" cdkDrag
+            <div (click)="openDialog(item)" *ngFor="let item of column.todos" cdkDrag
               class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400">
               {{item.title}}
             </div>
+            <div
+              class="w-full hover:bg-gray-300 text-gray-400 hover:text-gray-600 cursor-pointer bg-transparent rounded p-2 mt-2"
+              placeholder="Add a card">
+              <span><fa-icon [icon]="faPlus"></fa-icon></span> Add a card
+            </div>
           </div>
         </div>
-        <button class="shrink-0" (click)="addColumn()">Add column</button>
+        <button class="bg-white bg-opacity-20 hover:bg-opacity-30 w-64 pl-4 rounded py-2 text-left text-white shrink-0"
+          (click)="addColumn()"><span><fa-icon [icon]="faPlus"></fa-icon> Add column</span>
+        </button>
       </div>
     </div>
   </div>

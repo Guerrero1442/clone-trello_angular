@@ -19,7 +19,7 @@
           (click)="accordionMenu.toggle()">My Workspace
           <fa-icon [icon]="accordionMenu.expanded ? faAngleUp : faAngleDown"></fa-icon>
         </button>
-        <div [ngClass]="{
+        <div class="shrink-0 z-10" [ngClass]="{
     hidden: !accordionMenu.expanded,
     block: accordionMenu.expanded
   }">

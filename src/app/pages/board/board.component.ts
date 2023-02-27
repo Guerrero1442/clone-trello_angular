@@ -5,6 +5,9 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Column, ToDo } from 'src/app/models/todo.model';
+import { faEllipsisH, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Dialog } from '@angular/cdk/dialog';
+import { TodoDialogComponent } from 'src/app/components/todo-dialog/todo-dialog.component';
 
 @Component({
   selector: 'app-board',
@@ -24,6 +27,12 @@ import { Column, ToDo } from 'src/app/models/todo.model';
   ],
 })
 export class BoardComponent {
+  // icons
+  faEllipsisH = faEllipsisH;
+  faPlus = faPlus;
+
+  constructor(private dialog: Dialog) {}
+
   columns: Column[] = [
     {
       title: 'To Do',
@@ -73,5 +82,18 @@ export class BoardComponent {
       title: 'New Column',
       todos: [],
     });
+  }
+
+  openDialog(todo: ToDo) {
+    const dialogRef = this.dialog.open(TodoDialogComponent, {
+      minWidth: '300px',
+      autoFocus: false,
+      data: {
+        todo: todo,
+      },
+    });
+    dialogRef.closed.subscribe((result) => {
+      console.log(result);
+    }, console.error);
   }
 }

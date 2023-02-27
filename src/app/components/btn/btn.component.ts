@@ -14,34 +14,71 @@ export class BtnComponent {
     | 'warning'
     | 'dark'
     | 'light'
+    | 'gray'
     | 'danger' = 'primary';
 
+  mapColor = {
+    success: {
+      'bg-success-700': true,
+      'hover:bg-success-800': true,
+      'focus:ring-success-300': true,
+      'text-white': true,
+    },
+    primary: {
+      'bg-primary-700': true,
+      'hover:bg-primary-800': true,
+      'focus:ring-primary-300': true,
+      'text-white': true,
+    },
+    secondary: {
+      'bg-secondary-700': true,
+      'hover:bg-secondary-800': true,
+      'focus:ring-secondary-300': true,
+      'text-white': true,
+    },
+    info: {
+      'bg-info-700': true,
+      'hover:bg-info-800': true,
+      'focus:ring-info-300': true,
+      'text-white': true,
+    },
+    warning: {
+      'bg-warning-700': true,
+      'hover:bg-warning-800': true,
+      'focus:ring-warning-300': true,
+      'text-white': true,
+    },
+    danger: {
+      'bg-danger-700': true,
+      'hover:bg-danger-800': true,
+      'focus:ring-danger-300': true,
+      'text-white': true,
+    },
+    dark: {
+      'bg-dark-700': true,
+      'hover:bg-dark-800': true,
+      'focus:ring-dark-300': true,
+      'text-white': true,
+    },
+    light: {
+      'bg-light-700': true,
+      'hover:bg-light-800': true,
+      'focus:ring-light-300': true,
+      'text-black': true,
+    },
+    gray: {
+      'bg-gray-200': true,
+      'hover:bg-gray-300': true,
+      'focus:ring-gray-300': true,
+      'text-gray-700': true,
+    },
+  };
+
   get colors() {
-    return {
-      'bg-success-700': this.colorBtn === 'success',
-      'hover:bg-success-800': this.colorBtn === 'success',
-      'focus:ring-success-300': this.colorBtn === 'success',
-      'bg-primary-700': this.colorBtn === 'primary',
-      'hover:bg-primary-800': this.colorBtn === 'primary',
-      'focus:ring-primary-300': this.colorBtn === 'primary',
-      'bg-secondary-700': this.colorBtn === 'secondary',
-      'hover:bg-secondary-800': this.colorBtn === 'secondary',
-      'focus:ring-secondary-300': this.colorBtn === 'secondary',
-      'bg-info-700': this.colorBtn === 'info',
-      'hover:bg-info-800': this.colorBtn === 'info',
-      'focus:ring-info-300': this.colorBtn === 'info',
-      'bg-warning-700': this.colorBtn === 'warning',
-      'hover:bg-warning-800': this.colorBtn === 'warning',
-      'focus:ring-warning-300': this.colorBtn === 'warning',
-      'bg-danger-700': this.colorBtn === 'danger',
-      'hover:bg-danger-800': this.colorBtn === 'danger',
-      'focus:ring-danger-300': this.colorBtn === 'danger',
-      'bg-dark-700': this.colorBtn === 'dark',
-      'hover:bg-dark-800': this.colorBtn === 'dark',
-      'focus:ring-dark-300': this.colorBtn === 'dark',
-      'bg-light-700': this.colorBtn === 'light',
-      'hover:bg-light-800': this.colorBtn === 'light',
-      'focus:ring-light-300': this.colorBtn === 'light',
-    };
+    const colors = this.mapColor[this.colorBtn];
+    if (colors) {
+      return colors;
+    }
+    return {};
   }
 }
