@@ -23,7 +23,105 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@environments/*": [
+        "src/environments/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@modules/*": [
+        "src/app/modules/*"
+      ],
+      "@services/*": [
+        "src/app/services/*"
+      ],
+      "@components/*": [
+        "src/app/components/*"
+      ],
+      "@directives/*": [
+        "src/app/directives/*"
+      ],
+      "@pipes/*": [
+        "src/app/pipes/*"
+      ],
+      "@guards/*": [
+        "src/app/guards/*"
+      ],
+      "@resolvers/*": [
+        "src/app/resolvers/*"
+      ],
+      "@interceptors/*": [
+        "src/app/interceptors/*"
+      ],
+      "@utils/*": [
+        "src/app/utils/*"
+      ],
+      "@models/*": [
+        "src/app/models/*"
+      ],
+      "@enums/*": [
+        "src/app/enums/*"
+      ],
+      "@constants/*": [
+        "src/app/constants/*"
+      ],
+      "@interfaces/*": [
+        "src/app/interfaces/*"
+      ],
+      "@types/*": [
+        "src/app/types/*"
+      ],
+      "@validators/*": [
+        "src/app/validators/*"
+      ],
+      "@store/*": [
+        "src/app/store/*"
+      ],
+      "@actions/*": [
+        "src/app/store/actions/*"
+      ],
+      "@effects/*": [
+        "src/app/store/effects/*"
+      ],
+      "@reducers/*": [
+        "src/app/store/reducers/*"
+      ],
+      "@selectors/*": [
+        "src/app/store/selectors/*"
+      ],
+      "@states/*": [
+        "src/app/store/states/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@theme/*": [
+        "src/styles/theme/*"
+      ],
+      "@variables/*": [
+        "src/styles/variables/*"
+      ],
+      "@mixins/*": [
+        "src/styles/mixins/*"
+      ],
+      "@functions/*": [
+        "src/styles/functions/*"
+      ],
+      "@animations/*": [
+        "src/styles/animations/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

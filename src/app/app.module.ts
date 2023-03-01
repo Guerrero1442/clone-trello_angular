@@ -1,42 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { OverlayModule } from '@angular/cdk/overlay';
-import { CdkAccordionModule } from '@angular/cdk/accordion';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { DialogModule } from '@angular/cdk/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BtnComponent } from './components/btn/btn.component';
-import { LoginComponent } from './pages/login/login.component';
-import { BoardsComponent } from './pages/boards/boards.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { BoardComponent } from './pages/board/board.component';
-import { TodoDialogComponent } from './components/todo-dialog/todo-dialog.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    BtnComponent,
-    BoardsComponent,
-    NavbarComponent,
-    BoardComponent,
-    TodoDialogComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    OverlayModule,
-    CdkAccordionModule,
-    FontAwesomeModule,
-    DragDropModule,
-    DialogModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
