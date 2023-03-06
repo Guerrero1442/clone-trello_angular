@@ -29,7 +29,7 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     if (request.context.get(CHECK_TOKEN)) {
-      const isValideToken = this.tokenService.isValideToken();
+      const isValideToken = this.tokenService.isValidToken();
       if (!isValideToken) {
         return this.updateAccessToken(request, next);
       } else {
@@ -52,7 +52,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
   private updateAccessToken(request: HttpRequest<unknown>, next: HttpHandler) {
     const refreshToken = this.tokenService.getRefreshToken();
-    const isValideRefreshToken = this.tokenService.isValideRefreshToken();
+    const isValideRefreshToken = this.tokenService.isValidRefreshToken();
     if (refreshToken && isValideRefreshToken) {
       return this.authService
         .refreshToken(refreshToken)

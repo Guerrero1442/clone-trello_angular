@@ -1,67 +1,64 @@
 import { Injectable } from '@angular/core';
-import jwt_decode, {JwtPayload } from 'jwt-decode';
+import jwt_decode, { JwtPayload } from 'jwt-decode';
 import { getCookie, setCookie, removeCookie } from 'typescript-cookie';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
-
-  constructor() { }
+  constructor() {}
 
   saveToken(token: string) {
-    setCookie('token', token,{expires: 365, path: '/'});
+    setCookie('token', token, { expires: 365, path: '/' });
   }
 
   getToken() {
     return getCookie('token');
   }
 
-  removeToken(){
+  removeToken() {
     removeCookie('token');
   }
 
   saveRefreshToken(token: string) {
-    setCookie('refreshToken', token,{expires: 365, path: '/'});
+    setCookie('refreshToken', token, { expires: 365, path: '/' });
   }
 
   getRefreshToken() {
     return getCookie('refreshToken');
   }
 
-  removeRefreshToken(){
+  removeRefreshToken() {
     removeCookie('refreshToken');
   }
 
-  isValideToken(){
+  isValidToken() {
     const token = this.getToken();
-    if(token){
-      const decodeToken = jwt_decode<JwtPayload>(token);
-      if (decodeToken && decodeToken?.exp){
-        const tokenDate = new Date()
-        tokenDate.setUTCSeconds(decodeToken.exp);
-        const today = new Date();
-        return tokenDate.getTime() > today.getTime();
-      }
-      return false
+    if (!token) {
+      return false;
+    }
+    const decodeToken = jwt_decode<JwtPayload>(token);
+    if (decodeToken && decodeToken?.exp) {
+      const tokenDate = new Date(0);
+      tokenDate.setUTCSeconds(decodeToken.exp);
+      const today = new Date();
+      return tokenDate.getTime() > today.getTime();
     }
     return false;
   }
 
-  isValideRefreshToken(){
+  isValidRefreshToken() {
     const token = this.getRefreshToken();
-    if(token){
-      const decodeToken = jwt_decode<JwtPayload>(token);
-      if (decodeToken && decodeToken?.exp){
-        const tokenDate = new Date()
-        tokenDate.setUTCSeconds(decodeToken.exp);
-        const today = new Date();
-        return tokenDate.getTime() > today.getTime();
-      }
-      return false
+    if (!token) {
+      return false;
+    }
+    const decodeToken = jwt_decode<JwtPayload>(token);
+    if (decodeToken && decodeToken?.exp) {
+      const tokenDate = new Date(0);
+      tokenDate.setUTCSeconds(decodeToken.exp);
+      const today = new Date();
+      return tokenDate.getTime() > today.getTime();
     }
     return false;
   }
-
 }

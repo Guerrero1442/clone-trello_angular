@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@app/services/auth.service';
 import { faBell, faInfoCircle,faClose,faAngleDown } from '@fortawesome/free-solid-svg-icons';

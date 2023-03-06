@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { checkToken } from '@app/interceptors/token.interceptor';
 import { Board } from '@app/models/board.model';
+import { Card } from '@app/models/card.model';
 import { User } from '@app/models/user.model';
 import { environment } from '@environments/environment';
 import { TokenService } from './token.service';
@@ -18,5 +19,10 @@ export class BoardsService {
     return this.http.get<Board>(`${this.API_URI}/api/v1/boards/${id}`, {
       context: checkToken(),
     });
+  }
+
+  getPosition(cards: Card[],currentIndex:number){
+    console.log(cards,currentIndex)
+
   }
 }
