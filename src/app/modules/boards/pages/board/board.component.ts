@@ -11,7 +11,8 @@ import { TodoDialogComponent } from 'src/app/modules/boards/components/todo-dial
 import { ActivatedRoute } from '@angular/router';
 import { Board } from '@app/models/board.model';
 import { BoardsService } from '@app/services/boards.service';
-import { Card } from '@app/models/card.model';
+import { Card, UpdateCardDto } from '@app/models/card.model';
+import { CardsService } from '@app/services/cards.service';
 
 @Component({
   selector: 'app-board',
@@ -36,7 +37,7 @@ export class BoardComponent implements OnInit {
   faPlus = faPlus;
   isOpenBody = false;
 
-  constructor(private dialog: Dialog,private route:ActivatedRoute,private boardService:BoardsService) {}
+  constructor(private dialog: Dialog,private route:ActivatedRoute,private boardService:BoardsService, private cardService:CardsService) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params)=>{
@@ -67,7 +68,11 @@ export class BoardComponent implements OnInit {
         $event.currentIndex
       );
     }
-    this.boardService.getPosition($event.container.data,$event.currentIndex)
+    const position =  this.boardService.getPosition($event.container.data,$event.currentIndex)
+    const card = $event.container.data[$event.currentIndex];
+    const listId =  $event.container.id;
+    this.updateCard(card,position,listId)
+
   }
 
   // addColumn() {
@@ -93,6 +98,12 @@ export class BoardComponent implements OnInit {
   private getBoard(id:Board['id']){
     this.boardService.getBoard(id).subscribe((res)=>{
       this.board = res;
+    })
+  }
+
+  private updateCard(card:Card,position:Card['position'], listId:UpdateCardDto['listId']){
+    this.cardService.update(card.id,{position, listId}).subscribe((res)=>{
+      console.log(res);
     })
   }
 }

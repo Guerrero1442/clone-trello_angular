@@ -12,6 +12,7 @@ import { TokenService } from './token.service';
 })
 export class BoardsService {
   API_URI = environment.API_URL;
+  bufferSpace = 65535;
 
   constructor(private http: HttpClient) {}
 
@@ -21,8 +22,26 @@ export class BoardsService {
     });
   }
 
-  getPosition(cards: Card[],currentIndex:number){
-    console.log(cards,currentIndex)
-
+  getPosition(cards: Card[], currentIndex: number) {
+    if (cards.length === 1) {
+      return this.bufferSpace;
+    }
+    if (cards.length > 1 && currentIndex === 0) {
+      const onTopPosition = cards[1].position;
+      return onTopPosition / 2;
+    }
+    const lastIndex = cards.length - 1;
+    if (cards.length > 1 && currentIndex > 0 && currentIndex < lastIndex) {
+      const onTopPosition = cards[currentIndex + 1].position;
+      const onBottomPosition = cards[currentIndex - 1].position;
+      return (onTopPosition + onBottomPosition) / 2;
+    }
+    if (cards.length > 1 && currentIndex === lastIndex) {
+      const onBottomPosition = cards[lastIndex - 1].position;
+      return onBottomPosition + this.bufferSpace;
+    }
+    return 0;
   }
+
+
 }
