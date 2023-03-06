@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   faClock,
   faDashboard,
@@ -12,12 +12,14 @@ import {
   faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import { faTrello } from '@fortawesome/free-brands-svg-icons';
+import { MeService } from '@app/services/me.service';
+import { Board } from '@app/models/board.model';
 
 @Component({
   selector: 'app-boards',
   templateUrl: './boards.component.html',
 })
-export class BoardsComponent {
+export class BoardsComponent implements OnInit {
   faClock = faClock;
   faDashboard = faDashboard;
   faBox = faBox;
@@ -30,27 +32,17 @@ export class BoardsComponent {
   faBorderAll = faBorderAll;
   faUsers = faUsers;
 
-  items = [
-    {
-      label: 'Item 1',
-      items: [
-        { label: 'Item 1.1' },
-        { label: 'Item 1.2' },
-        { label: 'Item 1.3' },
-        { label: 'Item 1.4' },
-      ],
-    },
-    {
-      label: 'Item 2',
-      items: [{ label: 'Item 2.1' }, { label: 'Item 2.2' }],
-    },
-    {
-      label: 'Item 3',
-      items: [
-        { label: 'Item 3.1' },
-        { label: 'Item 3.2' },
-        { label: 'Item 3.3' },
-      ],
-    },
-  ];
+  boards: Board[] = [];
+
+  constructor(private meService: MeService) {}
+
+  ngOnInit(): void {
+    this.getMyBoards();
+  }
+
+  getMyBoards() {
+    this.meService.getMeBoards().subscribe((boards) => {
+      this.boards = boards;
+    });
+  }
 }

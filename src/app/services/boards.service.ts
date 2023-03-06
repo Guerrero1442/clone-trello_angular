@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { checkToken } from '@app/interceptors/token.interceptor';
+import { Board } from '@app/models/board.model';
 import { User } from '@app/models/user.model';
 import { environment } from '@environments/environment';
 import { TokenService } from './token.service';
@@ -8,13 +9,13 @@ import { TokenService } from './token.service';
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService {
+export class BoardsService {
   API_URI = environment.API_URL;
 
   constructor(private http: HttpClient) {}
 
-  getUsers() {
-    return this.http.get<User[]>(`${this.API_URI}/api/v1/users`, {
+  getBoard(id: Board['id']) {
+    return this.http.get<Board>(`${this.API_URI}/api/v1/boards/${id}`, {
       context: checkToken(),
     });
   }

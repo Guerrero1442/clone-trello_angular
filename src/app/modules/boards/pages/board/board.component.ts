@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Column, ToDo } from 'src/app/models/todo.model';
+import { ToDo } from 'src/app/models/todo.model';
 import { faEllipsisH, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Dialog } from '@angular/cdk/dialog';
 import { TodoDialogComponent } from 'src/app/modules/boards/components/todo-dialog/todo-dialog.component';
+import { ActivatedRoute } from '@angular/router';
+import { Board } from '@app/models/board.model';
+import { BoardsService } from '@app/services/boards.service';
+import { Card } from '@app/models/card.model';
 
 @Component({
   selector: 'app-board',
@@ -26,44 +30,29 @@ import { TodoDialogComponent } from 'src/app/modules/boards/components/todo-dial
     `,
   ],
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit {
   // icons
   faEllipsisH = faEllipsisH;
   faPlus = faPlus;
   isOpenBody = false;
 
-  constructor(private dialog: Dialog) {}
+  constructor(private dialog: Dialog,private route:ActivatedRoute,private boardService:BoardsService) {}
 
-  columns: Column[] = [
-    {
-      title: 'To Do',
-      todos: [
-        { id: '1', title: 'Item 1' },
-        { id: '2', title: 'Item 2' },
-        { id: '3', title: 'Item 3' },
-      ],
-    },
-    {
-      title: 'Doing',
-      todos: [
-        { id: '4', title: 'Item 4' },
-        { id: '5', title: 'Item 5' },
-        { id: '6', title: 'Item 6' },
-      ],
-    },
-    {
-      title: 'Done',
-      todos: [
-        { id: '7', title: 'Item 7' },
-        { id: '8', title: 'Item 8' },
-        { id: '9', title: 'Item 9' },
-      ],
-    },
-  ];
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params)=>{
+      const id = params.get('id');
+      if(id){
+        this.getBoard(id);
 
-  isOpen: boolean[] = Array(this.columns.length).fill(false);
+      }
+    })
+  }
 
-  drop($event: CdkDragDrop<ToDo[]>) {
+  board:Board | null = null;
+
+  isOpen: boolean[] = Array(this.board?.lists.length).fill(false);
+
+  drop($event: CdkDragDrop<Card[]>) {
     if ($event.previousContainer === $event.container) {
       moveItemInArray(
         $event.container.data,
@@ -80,23 +69,29 @@ export class BoardComponent {
     }
   }
 
-  addColumn() {
-    this.columns.push({
-      title: 'New Column',
-      todos: [],
-    });
-  }
+  // addColumn() {
+  //   this.columns.push({
+  //     title: 'New Column',
+  //     todos: [],
+  //   });
+  // }
 
-  openDialog(todo: ToDo) {
+  openDialog(card: Card) {
     const dialogRef = this.dialog.open(TodoDialogComponent, {
       minWidth: '300px',
       autoFocus: false,
       data: {
-        todo: todo,
+        card: card,
       },
     });
     dialogRef.closed.subscribe((result) => {
       console.log(result);
     }, console.error);
+  }
+
+  private getBoard(id:Board['id']){
+    this.boardService.getBoard(id).subscribe((res)=>{
+      this.board = res;
+    })
   }
 }
