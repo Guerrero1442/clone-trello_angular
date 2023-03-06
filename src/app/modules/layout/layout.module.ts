@@ -7,15 +7,18 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from '../shared/shared.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { BoardFormComponent } from './components/board-form/board-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [LayoutComponent, NavbarComponent],
+  declarations: [LayoutComponent, NavbarComponent, BoardFormComponent],
   imports: [
     CommonModule,
     LayoutRoutingModule,
     OverlayModule,
     FontAwesomeModule,
     SharedModule,
+    ReactiveFormsModule
   ],
 })
 export class LayoutModule {}

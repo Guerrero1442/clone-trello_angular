@@ -1,0 +1,96 @@
+<form [formGroup]="form" novalidate class="space-y-4" (ngSubmit)="doSave()">
+  <div class="w-3/4 m-auto py-2" [ngClass]="colors">
+    <img
+      class="mx-auto"
+      src="/assets/svg/layout-board.svg"
+      alt="layout board"
+    />
+  </div>
+  <div>
+    <div class="flex flex-wrap">
+      <div class="flex items-center mr-1">
+        <input
+          id="sky-radio"
+          type="radio"
+          value="sky"
+          name="backgroundColor"
+          formControlName="backgroundColor"
+          class="w-10 h-8 rounded cursor-pointer text-sky-700 bg-sky-700 hover:bg-sky-900 focus:ring-transparent"
+        />
+      </div>
+      <div class="flex items-center mr-1">
+        <input
+          id="yellow-radio"
+          type="radio"
+          value="yellow"
+          name="backgroundColor"
+          formControlName="backgroundColor"
+          class="w-10 h-8 rounded cursor-pointer text-yellow-700 bg-yellow-700 hover:bg-yellow-900 focus:ring-transparent"
+        />
+      </div>
+      <div class="flex items-center mr-1">
+        <input
+          id="green-radio"
+          type="radio"
+          value="green"
+          name="backgroundColor"
+          formControlName="backgroundColor"
+          class="w-10 h-8 rounded cursor-pointer text-green-700 bg-green-700 hover:bg-green-900 focus:ring-transparent"
+        />
+      </div>
+      <div class="flex items-center mr-1">
+        <input
+          id="violet-radio"
+          type="radio"
+          value="violet"
+          name="backgroundColor"
+          formControlName="backgroundColor"
+          class="w-10 h-8 rounded cursor-pointer text-violet-700 bg-violet-700 hover:bg-violet-900 focus:ring-transparent"
+        />
+      </div>
+      <div class="flex items-center mr-1">
+        <input
+          id="gray-radio"
+          type="radio"
+          value="gray"
+          name="backgroundColor"
+          formControlName="backgroundColor"
+          class="w-10 h-8 rounded cursor-pointer text-gray-700 bg-gray-700 hover:bg-gray-900 focus:ring-transparent"
+        />
+      </div>
+      <div class="flex items-center mr-1">
+        <input
+          id="red-radio"
+          type="radio"
+          value="red"
+          name="backgroundColor"
+          formControlName="backgroundColor"
+          class="w-10 h-8 rounded cursor-pointer bg-red-700 hover:bg-red-900 text-red-700 focus:ring-transparent"
+        />
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="relative">
+      <input
+        type="text"
+        formControlName="title"
+        placeholder="Enter title"
+        class="w-full rounded bg-gray-100 border-gray-300 border-2 hover:bg-gray-200"
+        [ngStyle]="{
+          'border-color':
+            titleField?.touched && titleField?.errors ? 'red' : 'blue'
+        }"
+      />
+    </div>
+    <div *ngIf="titleField?.errors && titleField?.touched" class="mt-1">
+      <div *ngIf="titleField?.hasError('required')" class="flex space-x-2">
+        <span>👋</span>
+        <p>Board title is required</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <app-btn typeBtn="submit" color="primary">Create</app-btn>
+  </div>
+</form>

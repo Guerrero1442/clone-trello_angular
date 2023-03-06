@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { checkToken } from '@app/interceptors/token.interceptor';
 import { Board } from '@app/models/board.model';
 import { Card } from '@app/models/card.model';
+import { Colors } from '@app/models/colors.model';
 import { User } from '@app/models/user.model';
 import { environment } from '@environments/environment';
 import { TokenService } from './token.service';
@@ -20,6 +21,15 @@ export class BoardsService {
     return this.http.get<Board>(`${this.API_URI}/api/v1/boards/${id}`, {
       context: checkToken(),
     });
+  }
+
+  createBoard(title:string,backgroundColor: Colors){
+    return this.http.post<Board>(`${this.API_URI}/api/v1/boards`,{
+      title,
+      backgroundColor
+    },{
+      context: checkToken(),
+    })
   }
 
   getPosition(cards: Card[], currentIndex: number) {
