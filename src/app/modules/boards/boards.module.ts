@@ -11,6 +11,7 @@ import { BoardsComponent } from './pages/boards/boards.component';
 import { BoardComponent } from './pages/board/board.component';
 import { TodoDialogComponent } from './components/todo-dialog/todo-dialog.component';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [BoardsComponent, BoardComponent, TodoDialogComponent],
@@ -23,6 +24,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     DialogModule,
     FontAwesomeModule,
     OverlayModule,
+    ReactiveFormsModule
   ],
 })
 export class BoardsModule {}

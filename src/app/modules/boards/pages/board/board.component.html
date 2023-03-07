@@ -2,98 +2,204 @@
   <div class="w-full grow bg-sky-600 px-4 pb-4">
     <div class="flex flex-col h-full">
       <div>
-        <h2 class="text-xl font-bold text-white my-4">{{board?.title}}</h2>
+        <h2 class="text-xl font-bold text-white my-4">{{ board?.title }}</h2>
       </div>
-      <div class="flex grow items-start w-full h-full overflow-x-scroll" cdkDropListGroup>
-        <div class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0" *ngFor="let list of board?.lists;let i = index">
+      <div
+        class="flex grow items-start w-full h-full overflow-x-scroll"
+        cdkDropListGroup
+      >
+        <div
+          class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0"
+          *ngFor="let list of board?.lists; let i = index"
+        >
           <div class="flex justify-between py-1">
-            <h3 class="text-sm font-bold ml-2">{{list.title}}</h3>
-            <button type="button" class=" text-gray-500 hover:text-gray-700 hover:bg-gray-300 h-full px-2 cursor-pointer
-            rounded" aria-expanded="false" (click)="isOpen[i] = !isOpen[i]" cdkOverlayOrigin
-              #menuOverlay="cdkOverlayOrigin">
+            <h3 class="text-sm font-bold ml-2">{{ list.title }}</h3>
+            <button
+              type="button"
+              class="text-gray-500 hover:text-gray-700 hover:bg-gray-300 h-full px-2 cursor-pointer rounded"
+              aria-expanded="false"
+              (click)="isOpen[i] = !isOpen[i]"
+              cdkOverlayOrigin
+              #menuOverlay="cdkOverlayOrigin"
+            >
               <fa-icon [icon]="faEllipsisH"></fa-icon>
             </button>
 
-            <ng-template (overlayOutsideClick)="isOpen[i] = !isOpen[i]" cdkConnectedOverlay
-              [cdkConnectedOverlayOrigin]="menuOverlay" [cdkConnectedOverlayOpen]="isOpen[i]">
-              <div class="absolute z-10 bg-white w-72 flex flex-col px-4 py-2 justify-center shadow rounded">
+            <ng-template
+              (overlayOutsideClick)="isOpen[i] = !isOpen[i]"
+              cdkConnectedOverlay
+              [cdkConnectedOverlayOrigin]="menuOverlay"
+              [cdkConnectedOverlayOpen]="isOpen[i]"
+            >
+              <div
+                class="absolute z-10 bg-white w-72 flex flex-col px-4 py-2 justify-center shadow rounded"
+              >
                 <h4 class="text-center">Enumerar acciones</h4>
-                <hr style="border-width: 0.5;" class="border-r-gray-500 w-full mx-auto my-2">
+                <hr
+                  style="border-width: 0.5"
+                  class="border-r-gray-500 w-full mx-auto my-2"
+                />
                 <ul class="flex flex-col text-left text-sm">
                   <li>
-                    <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Añadir
-                      tarjeta...</a>
+                    <a
+                      class="hover:bg-gray-100 cursor-pointer block my-1 py-1 text-left"
+                      >Añadir tarjeta...</a
+                    >
                   </li>
                   <li>
-                    <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Copiar
-                      lista...</a>
+                    <a
+                      class="hover:bg-gray-100 cursor-pointer block my-1 py-1 text-left"
+                      >Copiar lista...</a
+                    >
                   </li>
                   <li>
-                    <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Mover lista...</a>
+                    <a
+                      class="hover:bg-gray-100 cursor-pointer block my-1 py-1 text-left"
+                      >Mover lista...</a
+                    >
                   </li>
                   <li>
-                    <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Seguir</a>
+                    <a
+                      class="hover:bg-gray-100 cursor-pointer block my-1 py-1 text-left"
+                      >Seguir</a
+                    >
                   </li>
                 </ul>
-                <hr style="border-width: 0.5;" class="border-r-gray-500 w-full mx-auto my-2">
-                <h6 class="text-left text-sm py-1 font-semibold text-gray-400">Automatización</h6>
+                <hr
+                  style="border-width: 0.5"
+                  class="border-r-gray-500 w-full mx-auto my-2"
+                />
+                <h6 class="text-left text-sm py-1 font-semibold text-gray-400">
+                  Automatización
+                </h6>
                 <ul class="flex flex-col text-left text-sm">
                   <li>
-                    <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Cuando se añada
-                      una
-                      tarjeta a la lista...</a>
+                    <a
+                      class="hover:bg-gray-100 cursor-pointer block my-1 py-1 text-left"
+                      >Cuando se añada una tarjeta a la lista...</a
+                    >
                   </li>
                   <li>
-                    <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Todos los
-                      dias,ordenar
-                      la lista por...</a>
+                    <a
+                      class="hover:bg-gray-100 cursor-pointer block my-1 py-1 text-left"
+                      >Todos los dias,ordenar la lista por...</a
+                    >
                   </li>
                   <li>
-                    <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Todos los lunes,
-                      ordenar la lista por...</a>
+                    <a
+                      class="hover:bg-gray-100 cursor-pointer block my-1 py-1 text-left"
+                      >Todos los lunes, ordenar la lista por...</a
+                    >
                   </li>
                   <li>
-                    <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Crear una regla
-                      personalizada</a>
+                    <a
+                      class="hover:bg-gray-100 cursor-pointer block my-1 py-1 text-left"
+                      >Crear una regla personalizada</a
+                    >
                   </li>
                 </ul>
-                <hr style="border-width: 0.5;" class="border-r-gray-500 w-full my-2">
+                <hr
+                  style="border-width: 0.5"
+                  class="border-r-gray-500 w-full my-2"
+                />
                 <ul class="flex flex-col text-left text-sm">
                   <li>
-                    <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Mover todas las
-                      tarjetas de esta lista...</a>
+                    <a
+                      class="hover:bg-gray-100 cursor-pointer block my-1 py-1 text-left"
+                      >Mover todas las tarjetas de esta lista...</a
+                    >
                   </li>
                   <li>
-                    <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Archivar todas las
-                      tarjetas de esta lista...</a>
+                    <a
+                      class="hover:bg-gray-100 cursor-pointer block my-1 py-1 text-left"
+                      >Archivar todas las tarjetas de esta lista...</a
+                    >
                   </li>
                 </ul>
-                <hr style="border-width: 0.5;" class=" border-r-gray-500 w-full mx-auto my-2">
+                <hr
+                  style="border-width: 0.5"
+                  class="border-r-gray-500 w-full mx-auto my-2"
+                />
                 <ul class="flex flex-col text-left text-sm">
                   <li>
-                    <a class="hover:bg-gray-100 cursor-pointer block my-1  py-1 text-left">Archivar
-                      lista</a>
+                    <a
+                      class="hover:bg-gray-100 cursor-pointer block my-1 py-1 text-left"
+                      >Archivar lista</a
+                    >
                   </li>
                 </ul>
               </div>
             </ng-template>
           </div>
-          <div class="text-sm mt-2 min-h-[2.5rem]" [id]="list.id" cdkDropList (cdkDropListDropped)="drop($event)"
-            [cdkDropListData]="list.cards">
-            <div (click)="openDialog(card)" *ngFor="let card of list.cards" cdkDrag
-              class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400">
-              {{card.title}}
-            </div>
+          <div
+            class="text-sm mt-2 min-h-[2.5rem]"
+            [id]="list.id"
+            cdkDropList
+            (cdkDropListDropped)="drop($event)"
+            [cdkDropListData]="list.cards"
+          >
             <div
-              class="w-full hover:bg-gray-300 text-gray-400 hover:text-gray-600 cursor-pointer bg-transparent rounded p-2 mt-2"
-              placeholder="Add a card">
-              <span><fa-icon [icon]="faPlus"></fa-icon></span> Add a card
+              (click)="openDialog(card)"
+              *ngFor="let card of list.cards"
+              cdkDrag
+              class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
+            >
+              {{ card.title }}
+            </div>
+          </div>
+          <div class="mt-5">
+            <button
+              class="w-full text-sm text-left pl-2 p-1 space-x-1 text-gray-500 hover:text-gray-700 hover:bg-gray-300"
+              *ngIf="!list.showCardForm"
+              (click)="openFormCard(list)"
+            >
+              <fa-icon
+                class="text-gray-500 hover:text-gray-800 cursor-pointer"
+                [icon]="faPlus"
+              ></fa-icon>
+              Add a card
+            </button>
+            <div class="w-full" *ngIf="list.showCardForm">
+              <textarea
+                [formControl]="inputCard"
+                class="w-full rounded border-none text-sm placeholder-gray-400 resize-none focus:outline-none focus:ring-0 shadow"
+                placeholder="Enter a title for this card"
+              >
+              </textarea>
+              <div class="flex justify-between items-center mx-1">
+                <div class="flex space-x-3 items-center">
+                  <app-btn color="primary" (click)="createCard(list)"
+                    >Add card</app-btn
+                  >
+                  <span (click)="closeCardForm(list)"
+                    ><fa-icon
+                      class="text-gray-500 hover:text-gray-800 cursor-pointer"
+                      [icon]="faX"
+                    ></fa-icon
+                  ></span>
+                </div>
+                <button
+                  class="py-1 px-2 rounded hover:bg-gray-300 hover:text-gray-800"
+                >
+                  <fa-icon
+                    class="text-gray-500"
+                    size="1x"
+                    [icon]="faEllipsis"
+                  ></fa-icon>
+                </button>
+                <!-- <app-btn color="light" (click)="closeCardForm(list)"
+                  >Close</app-btn
+                > -->
+              </div>
             </div>
           </div>
         </div>
         <button
-          class="bg-white bg-opacity-20 hover:bg-opacity-30 w-64 pl-4 rounded py-2 text-left text-white shrink-0"><span><fa-icon
-              [icon]="faPlus"></fa-icon> Add column</span>
+          class="bg-white bg-opacity-20 hover:bg-opacity-30 w-64 pl-4 rounded py-2 text-left text-white shrink-0"
+        >
+          <span class="text-sm"
+            ><fa-icon [icon]="faPlus"></fa-icon> Add another list</span
+          >
         </button>
       </div>
     </div>
