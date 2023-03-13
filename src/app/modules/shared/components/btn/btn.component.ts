@@ -13,6 +13,7 @@ export class BtnComponent {
   @Input() loading = false;
   @Input() typeBtn: 'reset' | 'submit' | 'button' = 'button';
   @Input() color: Colors = 'primary';
+  @Input() text_align: 'text-left' | 'text-center' | 'text-right' = 'text-center';
 
   mapColors = COLORS;
 
@@ -25,4 +26,7 @@ export class BtnComponent {
     }
     return {};
   }
+
+
+
 }

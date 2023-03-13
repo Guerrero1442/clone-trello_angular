@@ -10,7 +10,7 @@ export interface Card {
 
 export interface CreateCardDto extends Omit<Card, 'id' | 'list'> {
   listId: number | string;
-  boardId: string;
+  boardId: string | number;
 }
 export interface UpdateCardDto extends Partial<Omit<Card, 'id' | 'list'>> {
   listId?: number | string;

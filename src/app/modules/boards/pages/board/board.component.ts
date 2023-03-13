@@ -73,6 +73,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   showCardForm = false;
   showListForm = false;
   backgroundColors = BACKGROUND_COLORS;
+  id: string | null = null;
 
   board: Board | null = null;
   inputCard = new FormControl<string>('', {
@@ -96,9 +97,15 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      const id = params.get('id');
-      if (id) {
-        this.getBoard(id);
+      this.id = params.get('id');
+      if (this.id) {
+        const idNum = parseInt(this.id);
+        this.getBoard(idNum);
+      }
+    });
+    this.boardService.update$.subscribe((res) => {
+      if(this.id){
+        this.getBoard(parseInt(this.id));
       }
     });
   }
@@ -108,7 +115,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   drop($event: CdkDragDrop<Card[]>) {
-    console.log($event.container.data);
     if ($event.previousContainer === $event.container) {
       moveItemInArray(
         $event.container.data,
@@ -139,7 +145,10 @@ export class BoardComponent implements OnInit, OnDestroy {
         $event.previousIndex,
         $event.currentIndex
       );
-      const position = this.boardService.getPosition($event.container.data, $event.currentIndex);
+      const position = this.boardService.getPosition(
+        $event.container.data,
+        $event.currentIndex
+      );
       const list = $event.container.data[$event.currentIndex];
       // this.listService.update(list.id, { position }).subscribe((res) => {
       //   console.log(res);
@@ -147,17 +156,17 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
   }
 
-  openDialog(card: Card) {
+  openDialog(card: Card, list: List, boardId: Board['id'] | undefined) {
     const dialogRef = this.dialog.open(TodoDialogComponent, {
       minWidth: '300px',
       autoFocus: false,
       data: {
         card: card,
+        list: list,
+        boardId: boardId,
       },
     });
-    dialogRef.closed.subscribe((result) => {
-      console.log(result);
-    }, console.error);
+    dialogRef.closed.subscribe((result) => {}, console.error);
   }
 
   private getBoard(id: Board['id']) {

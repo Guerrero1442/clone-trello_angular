@@ -138,13 +138,13 @@
           </div>
           <div
             class="text-sm mt-2 min-h-[2.5rem]"
-            [id]="list.id"
             cdkDropList
             (cdkDropListDropped)="drop($event)"
             [cdkDropListData]="list.cards"
+            [id]="list.id.toString()"
           >
             <div
-              (click)="openDialog(card)"
+              (click)="openDialog(card, list, board?.id)"
               *ngFor="let card of list.cards"
               cdkDrag
               class="bg-white shadow p-2 rounded mt-2 border-b border-x-gray-300 cursor-pointer hover:bg-gray-400"
@@ -172,6 +172,8 @@
                 [formControl]="inputCard"
                 class="w-full rounded border-none text-sm placeholder-gray-400 resize-none focus:outline-none focus:ring-0 shadow"
                 placeholder="Enter a title for this card"
+                autofocus
+                (keydown.enter)="createCard(list)"
               >
               </textarea>
               <div class="flex justify-between items-center mx-1">
