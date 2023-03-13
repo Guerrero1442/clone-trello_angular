@@ -252,4 +252,6 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
     return {};
   }
+
+
 }

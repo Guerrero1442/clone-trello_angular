@@ -19,6 +19,9 @@ export class BoardsService {
   backgroundColor$ = new BehaviorSubject<Colors>('sky');
   private updateSource = new Subject<void>();
   update$ = this.updateSource.asObservable();
+  private updateBoards = new Subject<void>();
+  updateBoards$ = this.updateBoards.asObservable();
+
 
   constructor(private http: HttpClient) {}
 
@@ -94,6 +97,10 @@ export class BoardsService {
 
   updateBoard() {
     this.updateSource.next();
+  }
+
+  updateBoardsSource() {
+    this.updateBoards.next();
   }
 
   setBackgorundColor(color: Colors) {

@@ -21,7 +21,6 @@ export class BoardFormComponent {
   mapColors = COLORS;
   @Output() closeOverlay = new EventEmitter<boolean>();
 
-
   form = this.formBuilder.nonNullable.group({
     title: ['', [Validators.required]],
     backgroundColor: new FormControl<Colors>('sky', {
@@ -33,15 +32,16 @@ export class BoardFormComponent {
   constructor(
     private formBuilder: FormBuilder,
     private boardService: BoardsService,
-    private router:Router
+    private router: Router
   ) {}
 
   doSave() {
     if (this.form.valid) {
       const { title, backgroundColor } = this.form.getRawValue();
-      this.boardService.createBoard(title, backgroundColor).subscribe(res => {
+      this.boardService.createBoard(title, backgroundColor).subscribe((res) => {
+        this.boardService.updateBoardsSource();
         this.closeOverlay.next(false);
-        this.router.navigate(['/app/boards',res.id])
+        this.router.navigate(['/app/boards', res.id]);
       });
     } else {
       this.form.markAllAsTouched();

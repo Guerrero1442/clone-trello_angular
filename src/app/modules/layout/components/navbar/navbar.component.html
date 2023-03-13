@@ -26,9 +26,7 @@
               </app-btn>
             </li>
             <li>
-              <a routerLink="/app/users" class="block py-3 px-4 text-white"
-                >Users</a
-              >
+              <a class="block py-3 px-4 text-white">Users</a>
             </li>
             <li>
               <app-btn
@@ -47,16 +45,22 @@
         </div>
       </div>
       <div class="flex items-center">
-        <div class="flex space-x-2">
-          <button class="text-white" type="button">
+        <div class="flex space-x-1">
+          <button
+            class="text-white py-1 px-2 rounded-full hover:bg-gray-700 hover:bg-opacity-30"
+            type="button"
+          >
             <fa-icon [icon]="faBell"></fa-icon>
           </button>
-          <button class="text-white" type="button">
+          <button
+            class="text-white py-2 px-2 rounded-full hover:bg-gray-700 hover:bg-opacity-30"
+            type="button"
+          >
             <fa-icon [icon]="faInfoCircle"></fa-icon>
           </button>
           <button
             type="button"
-            class="flex rounded-full"
+            class="flex py-1 px-2 hover:bg-gray-700 hover:bg-opacity-30 rounded-full"
             aria-expanded="false"
             type="button"
             (click)="isOpenOverlayAvatar = !isOpenOverlayAvatar"
@@ -156,7 +160,17 @@
           <fa-icon [icon]="faClose"></fa-icon>
         </button>
       </div>
-      <div class="py-3 px-4 flex justify-between">Content</div>
+      <div class="py-3 px-4 flex flex-col justify-between space-y-2">
+        <a
+          *ngFor="let board of boards"
+          [routerLink]="['/app/boards', board.id]"
+          (click)="isOpenOverlayBoards = !isOpenOverlayBoards"
+          class="flex items-center space-x-2 cursor-pointer hover:bg-gray-300 hover:bg-opacity-20"
+        >
+          <app-mini-card [color]="board.backgroundColor"></app-mini-card>
+          <p class="font-semibold text-sm">{{ board.title }}</p>
+        </a>
+      </div>
     </div>
   </ng-template>
   <ng-template
