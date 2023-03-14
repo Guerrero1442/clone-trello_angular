@@ -72,6 +72,8 @@ export class TodoDialogComponent {
   list: List;
   boardId: Board['id'];
 
+  @ViewChild('elementTitle') elementTitle: ElementRef;
+
   constructor(
     private cardService: CardsService,
     private overlay: Overlay,
@@ -116,6 +118,7 @@ export class TodoDialogComponent {
       const title = this.inputTitle.getRawValue();
       this.cardService.update(this.card.id, { title }).subscribe((res) => {
         this.card.title = title;
+        this.elementTitle.nativeElement.blur();
       });
     }
   }

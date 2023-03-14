@@ -4,12 +4,13 @@
       <fa-icon class="text-gray-800" [icon]="faCheckToSlot"></fa-icon>
       <div class="w-full space-y-1 flex flex-col">
         <input
+          #elementTitle
           type="text"
           class="h-8 text-lg font-semibold text-gray-800 focus:bg-white"
           type="text"
           [ngClass]="styleInputTitle"
           [formControl]="inputTitle"
-          (blur)="updateTitle()"
+          (keydown.enter)="updateTitle()"
         />
         <p class="text-sm text-gray-500">
           in list

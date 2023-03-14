@@ -218,6 +218,7 @@
         >
           <textarea
             [formControl]="inputList"
+            (keydown.enter)="createList()"
             class="w-full rounded border-none text-sm placeholder-gray-400 resize-none focus:outline-none focus:ring-0 shadow"
             placeholder="Enter a title for this card"
           >
